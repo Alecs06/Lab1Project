@@ -78,26 +78,18 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="897.2,2066.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="817.2,2124" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap:VirtualizedContainerService.HintSize="484.8,2043.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap:VirtualizedContainerService.HintSize="649.6,2100.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Int32" Name="secretNumber" />
-        <Variable x:TypeArguments="scg:List(x:Int32)" Name="guesses">
-          <Variable.Default>
-            <VisualBasicValue x:TypeArguments="scg:List(x:Int32)" ExpressionText="New List(Of Int32)" />
-          </Variable.Default>
-        </Variable>
+        <Variable x:TypeArguments="scg:List(x:Int32)" Default="[New List(Of Int32)]" Name="guesses" />
         <Variable x:TypeArguments="x:String" Name="mode" />
-        <Variable x:TypeArguments="x:Int32" Name="maxAttempts">
-          <Variable.Default>
-            <Literal x:TypeArguments="x:Int32" Value="10" />
-          </Variable.Default>
-        </Variable>
+        <Variable x:TypeArguments="x:Int32" Default="10" Name="maxAttempts" />
         <Variable x:TypeArguments="x:Boolean" Name="won" />
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
@@ -105,7 +97,7 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign sap:VirtualizedContainerService.HintSize="451.2,174.4" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign sap:VirtualizedContainerService.HintSize="616,174.4" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="x:Int32">[secretNumber]</OutArgument>
         </Assign.To>
@@ -113,13 +105,13 @@
           <InArgument x:TypeArguments="x:Int32">[New System.Random().Next(1, 101)]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="451.2,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Secret number generated&quot;]" />
-      <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="451.2,273.6" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Enter 1 for Human, 2 for Bot" Title="Mode" TopMost="False">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="616,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Secret number generated&quot;]" />
+      <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="616,273.6" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Enter 1 for Human, 2 for Bot" Title="Mode" TopMost="False">
         <ui:InputDialog.Result>
           <OutArgument x:TypeArguments="x:String">[mode]</OutArgument>
         </ui:InputDialog.Result>
       </ui:InputDialog>
-      <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[mode]" sap:VirtualizedContainerService.HintSize="451.2,755.2" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[mode]" sap:VirtualizedContainerService.HintSize="616,812.8" sap2010:WorkflowViewState.IdRef="Switch`1_1">
         <Switch.Default>
           <Sequence DisplayName="Default" sap:VirtualizedContainerService.HintSize="449.6,173.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
@@ -130,13 +122,13 @@
             <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,113.6" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Invalid mode&quot;]" />
           </Sequence>
         </Switch.Default>
-        <Sequence x:Key="{x:Null}" DisplayName="Case" sap:VirtualizedContainerService.HintSize="449.6,403.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence x:Key="1" DisplayName="Case" sap:VirtualizedContainerService.HintSize="449.6,227.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="HumanPlay - Invoke Workflow File (HumanPlay.xaml)" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="HumanPlay.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="HumanPlay - Invoke Workflow File (HumanPlay.xaml)" sap:VirtualizedContainerService.HintSize="416,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="HumanPlay.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Won">[won]</OutArgument>
               <OutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="out_Guesses">[guesses]</OutArgument>
@@ -144,6 +136,13 @@
               <InArgument x:TypeArguments="x:Int32" x:Key="in_SecretNumber">[secretNumber]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
+        </Sequence>
+        <Sequence x:Key="2" DisplayName="Case" sap:VirtualizedContainerService.HintSize="449.6,227.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="BotPlay - Invoke Workflow File (BotPlay.xaml)" sap:VirtualizedContainerService.HintSize="416,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="BotPlay.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Won">[won]</OutArgument>
@@ -154,7 +153,7 @@
           </ui:InvokeWorkflowFile>
         </Sequence>
       </Switch>
-      <If Condition="[guesses IsNot Nothing AndAlso guesses.Count &gt; 0]" sap:VirtualizedContainerService.HintSize="451.2,582.4" sap2010:WorkflowViewState.IdRef="If_1">
+      <If Condition="[guesses IsNot Nothing AndAlso guesses.Count &gt; 0]" sap:VirtualizedContainerService.HintSize="616,582.4" sap2010:WorkflowViewState.IdRef="If_1">
         <If.Then>
           <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="449.6,227.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
             <sap:WorkflowViewStateService.ViewState>
