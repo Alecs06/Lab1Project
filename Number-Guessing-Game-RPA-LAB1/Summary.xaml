@@ -1,8 +1,11 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="Summary" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_SecreteNumber" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_SecretNumber" Type="InArgument(x:Int32)" />
     <x:Property Name="in_Won" Type="InArgument(x:Boolean)" />
     <x:Property Name="in_Guesses" Type="InArgument(scg:List(x:Int32))" />
+    <x:Property Name="in_PlayerName" Type="InArgument(x:String)" />
+    <x:Property Name="in_LifetimeStats" Type="InArgument(scg:Dictionary(x:String, x:Int32))" />
+    <x:Property Name="in_WinRate" Type="InArgument(x:Double)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -93,6 +96,7 @@
   <Sequence DisplayName="Summary" sap:VirtualizedContainerService.HintSize="817.2,2583.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="historyText" />
+      <Variable x:TypeArguments="x:String" Name="careerText" />
       <Variable x:TypeArguments="x:Int32" Name="bucket" />
       <Variable x:TypeArguments="x:String" Name="rating" />
       <Variable x:TypeArguments="x:Double" Name="average" />
@@ -221,6 +225,7 @@
         </Assign>
       </Sequence>
     </Switch>
+    <Assign DisplayName="Build career text" sap2010:WorkflowViewState.IdRef="Assign_101"><Assign.To><OutArgument x:TypeArguments="x:String">[careerText]</OutArgument></Assign.To><Assign.Value><InArgument x:TypeArguments="x:String">[&quot;--- &quot; &amp; in_PlayerName &amp; &quot;'s career ---&quot; &amp; vbCrLf &amp; &quot;Games played: &quot; &amp; in_LifetimeStats(&quot;games&quot;).ToString &amp; vbCrLf &amp; &quot;Wins: &quot; &amp; in_LifetimeStats(&quot;wins&quot;).ToString &amp; vbCrLf &amp; &quot;Win rate: &quot; &amp; in_WinRate.ToString(&quot;F1&quot;) &amp; &quot;%&quot; &amp; vbCrLf &amp; &quot;Best win: &quot; &amp; If(in_LifetimeStats(&quot;best&quot;) = 0, &quot;n/a&quot;, in_LifetimeStats(&quot;best&quot;).ToString &amp; &quot; guesses&quot;)]</InArgument></Assign.Value></Assign>
     <If Condition="[in_Won]" sap:VirtualizedContainerService.HintSize="451.2,476.8" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
         <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="449.6,173.6" sap2010:WorkflowViewState.IdRef="Sequence_9">
@@ -229,7 +234,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,113.6" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;You won! The number was &quot; &amp; in_SecreteNumber.ToString &amp; &quot;.&quot; &amp; vbCrLf &amp; vbCrLf &amp; &quot;Guesses: &quot; &amp; historyText &amp; vbCrLf &amp; &quot;Attempts: &quot; &amp; stats(&quot;attempts&quot;).ToString &amp; vbCrLf &amp; &quot;Lowest guess: &quot; &amp; stats(&quot;lowest&quot;).ToString &amp; vbCrLf &amp; &quot;Highest guess: &quot; &amp; stats(&quot;highest&quot;).ToString &amp; vbCrLf &amp; &quot;Average guess: &quot; &amp; average.ToString(&quot;F1&quot;) &amp; vbCrLf &amp; &quot;Rating: &quot; &amp; rating]" />
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,113.6" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;You won! The number was &quot; &amp; in_SecretNumber.ToString &amp; &quot;.&quot; &amp; vbCrLf &amp; vbCrLf &amp; &quot;Guesses: &quot; &amp; historyText &amp; vbCrLf &amp; &quot;Attempts: &quot; &amp; stats(&quot;attempts&quot;).ToString &amp; vbCrLf &amp; &quot;Lowest guess: &quot; &amp; stats(&quot;lowest&quot;).ToString &amp; vbCrLf &amp; &quot;Highest guess: &quot; &amp; stats(&quot;highest&quot;).ToString &amp; vbCrLf &amp; &quot;Average guess: &quot; &amp; average.ToString(&quot;F1&quot;) &amp; vbCrLf &amp; &quot;Rating: &quot; &amp; rating &amp; vbCrLf &amp; vbCrLf &amp; careerText]" />
         </Sequence>
       </If.Then>
       <If.Else>
@@ -240,9 +245,10 @@
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,113.6" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Out of attempts! The number was &quot; &amp; in_SecreteNumber.ToString &amp; &quot;.&quot; &amp; vbCrLf &amp; vbCrLf &amp; &quot;Guesses: &quot; &amp; historyText &amp; vbCrLf &amp; &quot;Attempts: &quot; &amp; stats(&quot;attempts&quot;).ToString &amp; vbCrLf &amp; &quot;Lowest guess: &quot; &amp; stats(&quot;lowest&quot;).ToString &amp; vbCrLf &amp; &quot;Highest guess: &quot; &amp; stats(&quot;highest&quot;).ToString &amp; vbCrLf &amp; &quot;Average guess: &quot; &amp; average.ToString(&quot;F1&quot;) &amp; vbCrLf &amp; &quot;Rating: &quot; &amp; rating]" />
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,113.6" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Out of attempts! The number was &quot; &amp; in_SecretNumber.ToString &amp; &quot;.&quot; &amp; vbCrLf &amp; vbCrLf &amp; &quot;Guesses: &quot; &amp; historyText &amp; vbCrLf &amp; &quot;Attempts: &quot; &amp; stats(&quot;attempts&quot;).ToString &amp; vbCrLf &amp; &quot;Lowest guess: &quot; &amp; stats(&quot;lowest&quot;).ToString &amp; vbCrLf &amp; &quot;Highest guess: &quot; &amp; stats(&quot;highest&quot;).ToString &amp; vbCrLf &amp; &quot;Average guess: &quot; &amp; average.ToString(&quot;F1&quot;) &amp; vbCrLf &amp; &quot;Rating: &quot; &amp; rating &amp; vbCrLf &amp; vbCrLf &amp; careerText]" />
         </Sequence>
       </If.Else>
     </If>
+    <ui:WriteTextFile DisplayName="Write Text File" FileName="[&quot;data\last_game.txt&quot;]" sap2010:WorkflowViewState.IdRef="WriteTextFile_102" Text="[&quot;Player: &quot; &amp; in_PlayerName &amp; vbCrLf &amp; &quot;Result: &quot; &amp; If(in_Won, &quot;Won&quot;, &quot;Lost&quot;) &amp; vbCrLf &amp; &quot;Secret number: &quot; &amp; in_SecretNumber.ToString &amp; vbCrLf &amp; &quot;Guesses: &quot; &amp; historyText &amp; vbCrLf &amp; &quot;Rating: &quot; &amp; rating &amp; vbCrLf &amp; vbCrLf &amp; careerText]" />
   </Sequence>
 </Activity>

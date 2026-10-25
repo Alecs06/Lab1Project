@@ -4,6 +4,7 @@
     <x:Property Name="out_Guesses" Type="OutArgument(scg:List(x:Int32))" />
     <x:Property Name="in_MaxAttempts" Type="InArgument(x:Int32)" />
     <x:Property Name="in_SecretNumber" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_MaxNumber" Type="InArgument(x:Int32)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -141,7 +142,7 @@
               <av:PointCollection x:Key="ConnectorLocation">450.2,335.4 450.2,365.4 450,365.4 450,380</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" Title="{x:Null}" DisplayName="Ask" sap:VirtualizedContainerService.HintSize="110.4,70.4" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="Guess a number from 1 to 100" TopMost="False">
+          <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" Title="{x:Null}" DisplayName="Ask" sap:VirtualizedContainerService.HintSize="110.4,70.4" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="[&quot;Guess a number from 1 to &quot; &amp; in_MaxNumber.ToString]" TopMost="False">
             <ui:InputDialog.Result>
               <OutArgument x:TypeArguments="x:String">[guessText]</OutArgument>
             </ui:InputDialog.Result>

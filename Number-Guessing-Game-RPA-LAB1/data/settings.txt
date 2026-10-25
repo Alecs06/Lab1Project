@@ -1,0 +1,2 @@
+maxAttempts=10
+maxNumber=100
