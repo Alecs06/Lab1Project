@@ -4,6 +4,7 @@
     <x:Property Name="out_Guesses" Type="OutArgument(scg:List(x:Int32))" />
     <x:Property Name="in_MaxAttempts" Type="InArgument(x:Int32)" />
     <x:Property Name="in_SecretNumber" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_MaxNumber" Type="InArgument(x:Int32)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -119,6 +120,7 @@
         <InArgument x:TypeArguments="x:Boolean">[False]</InArgument>
       </Assign.Value>
     </Assign>
+    <Assign DisplayName="Set high = max number" sap2010:WorkflowViewState.IdRef="Assign_101"><Assign.To><OutArgument x:TypeArguments="x:Int32">[high]</OutArgument></Assign.To><Assign.Value><InArgument x:TypeArguments="x:Int32">[in_MaxNumber]</InArgument></Assign.Value></Assign>
     <ui:InterruptibleWhile CurrentIndex="{x:Null}" DisplayName="While" sap:VirtualizedContainerService.HintSize="521.6,1528" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
       <ui:InterruptibleWhile.Body>
         <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="520,1397.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
