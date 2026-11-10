@@ -4,6 +4,7 @@
   "description": "COOL GAME INCOMING",
   "main": "Main.xaml",
   "dependencies": {
+    "GameLibrary": "[1.0.1]",
     "UiPath.System.Activities": "[26.4.1-preview]"
   },
   "webServices": [],
